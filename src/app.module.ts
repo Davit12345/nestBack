@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { ProfileModule } from './profile/profile.module';
 import { TagModule } from './tag/tag.module';
+import {SocketGateway} from "./socket.gateway";
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { TagModule } from './tag/tag.module';
   controllers: [
     AppController
   ],
-  providers: []
+  providers: [SocketGateway]
 })
 export class ApplicationModule {
   constructor(private readonly connection: Connection) {}

@@ -34,6 +34,7 @@ export class ProfileService {
 
     let profile: ProfileData = {
       username: _profile.username,
+      email: _profile.email,
       bio: _profile.bio,
       image: _profile.image
     };

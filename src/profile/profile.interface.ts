@@ -3,6 +3,7 @@ export interface ProfileData {
   bio: string;
   image?: string;
   following?: boolean;
+  email?: string;
 }
 
 export interface ProfileRO {
