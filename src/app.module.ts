@@ -7,6 +7,11 @@ import { Connection } from 'typeorm';
 import { ProfileModule } from './profile/profile.module';
 import { TagModule } from './tag/tag.module';
 import {SocketGateway} from "./socket.gateway";
+import { CategoryModule } from './category/category.module';
+import { QuestionsModule } from './questions/questions.module';
+import { AnswersModule } from './answers/answers.module';
+import { GameModule } from './games/game.module';
+import {AnswersService} from "./answers/answers.service";
 
 @Module({
   imports: [
@@ -14,7 +19,11 @@ import {SocketGateway} from "./socket.gateway";
     ArticleModule,
     UserModule,
     ProfileModule,
-    TagModule
+    CategoryModule,
+    QuestionsModule,
+    AnswersModule,
+    TagModule,
+    GameModule,
   ],
   controllers: [
     AppController

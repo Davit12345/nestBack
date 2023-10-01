@@ -50,6 +50,7 @@ export class ArticleController {
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   @Post()
   async create(@User('id') userId: number, @Body('article') articleData: CreateArticleDto) {
+    // return articleData
     return this.articleService.create(userId, articleData);
   }
 

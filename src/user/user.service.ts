@@ -22,8 +22,8 @@ export class UserService {
     return await this.userRepository.find();
   }
 
-  async findOne({email, password}: LoginUserDto): Promise<UserEntity> {
-    const user = await this.userRepository.findOne({email});
+  async findOne({username, password}: LoginUserDto): Promise<UserEntity> {
+    const user = await this.userRepository.findOne({username});
     if (!user) {
       return null;
     }
