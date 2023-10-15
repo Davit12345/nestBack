@@ -1,17 +1,17 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { ArticleModule } from './article/article.module';
-import { UserModule } from './user/user.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Connection } from 'typeorm';
-import { ProfileModule } from './profile/profile.module';
-import { TagModule } from './tag/tag.module';
+import {Module} from '@nestjs/common';
+import {AppController} from './app.controller';
+import {ArticleModule} from './article/article.module';
+import {UserModule} from './user/user.module';
+import {TypeOrmModule} from '@nestjs/typeorm';
+import {Connection} from 'typeorm';
+import {ProfileModule} from './profile/profile.module';
+import {TagModule} from './tag/tag.module';
 import {SocketGateway} from "./socket.gateway";
-import { CategoryModule } from './category/category.module';
-import { QuestionsModule } from './questions/questions.module';
-import { AnswersModule } from './answers/answers.module';
-import { GameModule } from './games/game.module';
-import {AnswersService} from "./answers/answers.service";
+import {CategoryModule} from './category/category.module';
+import {QuestionsModule} from './questions/questions.module';
+import {AnswersModule} from './answers/answers.module';
+import {GameModule} from './games/game.module';
+import {GameTypeTimeModule} from "./game-type-time/game-type-time.module";
 
 @Module({
   imports: [
@@ -22,6 +22,7 @@ import {AnswersService} from "./answers/answers.service";
     CategoryModule,
     QuestionsModule,
     AnswersModule,
+    GameTypeTimeModule,
     TagModule,
     GameModule,
   ],

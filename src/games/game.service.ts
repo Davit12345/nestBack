@@ -1,18 +1,25 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 import {QuestionsService} from "../questions/questions.service";
 import {AnswersService} from "../answers/answers.service";
 import {InjectRepository} from "@nestjs/typeorm";
 import {Comment} from "../article/comment.entity";
+import {FollowsEntity} from "../profile/follows.entity";
+import {Repository} from "typeorm";
+import {SimpleGameEntity} from "./simple-game.entity";
+import {SimpleGameResultDto} from "./simple-game-result.dto";
 
 @Injectable()
 export class GameService {
     constructor(
         private readonly questionsService: QuestionsService,
         private readonly answersService: AnswersService,
-    ) {}
+        @InjectRepository(SimpleGameEntity)
+        private readonly simpleGameRepository: Repository<SimpleGameEntity>
+    ) {
+    }
 
-    async getGame() {
-        const questions = await this.questionsService.findAllRandom(10,6); // Assuming you have a findAll method in QuestionsService
+    async getGame(_categories: Array<number>) {
+        const questions = await this.questionsService.findAllRandom(10, _categories); // Assuming you have a findAll method in QuestionsService
         const formattedQuestions = await Promise.all(
             questions.map(async (question) => {
                 const answers = await this.answersService.findByQuestionIdRandom(
@@ -29,6 +36,22 @@ export class GameService {
             }),
         );
 
-        return { questions: formattedQuestions };
+        return {questions: formattedQuestions};
+    }
+
+    async saveResult(user_id: number, _result: SimpleGameResultDto) {
+        var result = new SimpleGameEntity();
+        result.correct = _result.correct;
+        result.incorrect = _result.incorrect;
+        result.count = _result.count;
+        result.time_type_id = _result.time_type_id;
+        result.points = _result.points;
+        result.user_id = user_id;
+         var response =await this.simpleGameRepository.save(result);
+         return response;
+
+    }
+    async getTopData(_result: SimpleGameResultDto){
+
     }
 }

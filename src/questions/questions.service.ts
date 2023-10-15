@@ -11,12 +11,13 @@ export class QuestionsService {
     ) {}
 
 
-    async findAll(limit:number,categoryId:number=6) {
+    async findAll(limit:number) {
         return await this.questionsRepository.find({
             take: limit
         });
     }
-    async findAllRandom(limit:number,categoryId: number): Promise<Question[]> {
+    async findAllRandom(limit:number,_categories:any): Promise<Question[]> {
+      var categoryId=_categories[0]
         return this.questionsRepository.createQueryBuilder()
             .where('category_id = :categoryId', { categoryId })
             .orderBy('RAND()')
