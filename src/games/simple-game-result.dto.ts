@@ -4,4 +4,5 @@ export class SimpleGameResultDto {
   readonly count: number;
   readonly time_type_id: number;
   readonly points: number;
+  readonly category_id: number;
 }

@@ -18,7 +18,7 @@ export class GameController {
     async  keepResult(@User('id') userId: number,@Body('result') result: SimpleGameResultDto) {
       var resultData=  await this.gameService.saveResult(userId,result);
       var topData=  await this.gameService.getTopData(result);
-      return resultData;
+      return    {result:resultData,topList:topData};
     }
 
 

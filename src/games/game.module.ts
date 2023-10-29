@@ -13,7 +13,7 @@ import {GameTypeTime} from "../game-type-time/game_type_time.entity";
 import {SimpleGameEntity} from "./simple-game.entity";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([SimpleGameEntity,Answer,Question]), AnswersModule,QuestionsModule],
+  imports: [TypeOrmModule.forFeature([SimpleGameEntity,Answer,Question]), AnswersModule,QuestionsModule,],
   controllers: [GameController],
   providers: [GameService,AnswersService,QuestionsService],
 })

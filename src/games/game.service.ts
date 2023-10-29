@@ -7,6 +7,8 @@ import {FollowsEntity} from "../profile/follows.entity";
 import {Repository} from "typeorm";
 import {SimpleGameEntity} from "./simple-game.entity";
 import {SimpleGameResultDto} from "./simple-game-result.dto";
+import {UserEntity} from "../user/user.entity";
+import {UserDto} from "../user/dto/user-info.dto";
 
 @Injectable()
 export class GameService {
@@ -46,12 +48,36 @@ export class GameService {
         result.count = _result.count;
         result.time_type_id = _result.time_type_id;
         result.points = _result.points;
+        result.category_id = _result.category_id;
         result.user_id = user_id;
-         var response =await this.simpleGameRepository.save(result);
-         return response;
+        return await this.simpleGameRepository.save(result);
+
 
     }
-    async getTopData(_result: SimpleGameResultDto){
 
+    async getTopData(_result: SimpleGameResultDto) {
+        const a =await  this.simpleGameRepository.find({
+            where: {
+                category_id: _result.category_id,
+                time_type_id: _result.time_type_id,
+            },
+            order:{
+                points: 'DESC'
+            },
+            take: 5,
+            relations: ['user']
+        });
+      a.forEach(result => {
+            result.user = this.transformUser(result.user);
+        });
+      return a;
+
+    }
+
+    transformUser(user: UserDto): UserDto {
+        return {
+            username: user.username,
+            email: user.email,
+        };
     }
 }
