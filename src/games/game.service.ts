@@ -20,8 +20,8 @@ export class GameService {
     ) {
     }
 
-    async getGame(_categories: Array<number>) {
-        const questions = await this.questionsService.findAllRandom(10, _categories); // Assuming you have a findAll method in QuestionsService
+    async getGame(category) {
+        const questions = await this.questionsService.findAllRandom(10, category); // Assuming you have a findAll method in QuestionsService
         const formattedQuestions = await Promise.all(
             questions.map(async (question) => {
                 const answers = await this.answersService.findByQuestionIdRandom(

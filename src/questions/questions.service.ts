@@ -16,10 +16,9 @@ export class QuestionsService {
             take: limit
         });
     }
-    async findAllRandom(limit:number,_categories:any): Promise<Question[]> {
-      var categoryId=_categories[0]
+    async findAllRandom(limit:number,categoryId:number): Promise<Question[]> {
         return this.questionsRepository.createQueryBuilder()
-            .where('category_id = :categoryId', { categoryId })
+            .where('category_id = :categoryId', {categoryId:categoryId})
             .orderBy('RAND()')
             .take(limit)
             .getMany();

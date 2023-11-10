@@ -8,10 +8,9 @@ export class GameController {
     constructor(private readonly gameService: GameService) {
     }
 
-    @Get('simple/:categories')
-    getGame(@Param('categories') categories: string) {
-        const _categories = JSON.parse(categories);
-        return this.gameService.getGame(_categories);
+    @Get('simple/:id')
+    getGame(@Param('id') category: number) {
+        return this.gameService.getGame(category);
     }
 
     @Post('simple/result')
